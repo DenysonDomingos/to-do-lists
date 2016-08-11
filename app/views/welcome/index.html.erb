@@ -1,0 +1,17 @@
+<h1>Welcome</h1>
+
+<% if user_signed_in? %>
+	<ul> 
+		<li><%= current_user.email %> </li>
+		<li><%= link_to "Sign_out", destroy_user_session_path, method: :delete %> </li>
+	</ul>
+<% else %>
+	<ul> 
+		<li><%= link_to "Register New User", new_user_registration_path %> </li>
+		<li><%= link_to "Sign_in", new_user_session_path %> </li>
+	</ul>
+<% end %>
+
+<ul>
+	<li><%= link_to "Todo List",todo_lists_path %></li>
+</ul>
