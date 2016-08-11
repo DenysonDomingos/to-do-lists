@@ -12,7 +12,11 @@
 
 <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <%= link_to "Todo list", todo_lists_path, id: "logo" %>
+      	<% if user_signed_in? %>
+        	<%= link_to "Todo list", main_index_path, id: "logo" %>
+        <% else %>
+			<%= link_to "Todo list", welcome_index_path, id: "logo" %>
+        <% end %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
@@ -32,3 +36,5 @@
 
 </body>
 </html>
+
+
