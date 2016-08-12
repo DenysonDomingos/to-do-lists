@@ -12,10 +12,12 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-select
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-select';
 
 
  $white_opaque: rgba(250, 250, 250, .3);
@@ -313,4 +315,6 @@ p {
     padding-bottom: 12px;
   }
 }
+
+
 

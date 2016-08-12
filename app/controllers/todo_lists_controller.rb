@@ -29,6 +29,11 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.new(todo_list_params)
 
     respond_to do |format|
+
+      if @todo_list.status == false
+        @todo_list.user_create = current_user.email
+      else
+      end
       if @todo_list.save
         format.html { redirect_to @todo_list, notice: 'Todo list was successfully created.' }
         format.json { render :show, status: :created, location: @todo_list }
@@ -71,6 +76,6 @@ class TodoListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_list_params
-      params.require(:todo_list).permit(:title, :description)
+      params.require(:todo_list).permit(:title, :description, :status, :user_create)
     end
 end

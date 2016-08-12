@@ -11,10 +11,16 @@
     </div>
   <% end %>
 
+  <div class="select">
+    <%= f.label "Privacy" %><br>
+    <%= f.select(:status, options_for_select([['Public', true], ["Private", false]], @todo_list.status), {include_blank: "Select"}, { 'data-width' => "10%", :class => "selectpicker"}) %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
