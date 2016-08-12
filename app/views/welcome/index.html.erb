@@ -5,12 +5,17 @@
     Your life in a more organized way
   </h2>
 
-  <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+	<% if user_signed_in? %>
+	  
+	<% else %>
+	  <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+	<% end %>
+
 
 <!--   <h3>
-  	<br>
-	Lower your IT costs, visit:
-	<a href="http://www.autoseg.com/">autoseg.com</a>
+    <br>
+  Lower your IT costs, visit:
+  <a href="http://www.autoseg.com/">autoseg.com</a>
   </h3>
  -->
 </div>
