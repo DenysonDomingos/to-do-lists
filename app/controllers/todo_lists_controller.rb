@@ -30,10 +30,8 @@ class TodoListsController < ApplicationController
 
     respond_to do |format|
 
-      if @todo_list.status == false
-        @todo_list.user_create = current_user.email
-      else
-      end
+    @todo_list.user_create = current_user.email
+      
       if @todo_list.save
         format.html { redirect_to @todo_list, notice: 'Todo list was successfully created.' }
         format.json { render :show, status: :created, location: @todo_list }

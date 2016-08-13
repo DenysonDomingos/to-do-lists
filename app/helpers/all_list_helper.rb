@@ -1,0 +1,2 @@
+module AllListHelper
+end

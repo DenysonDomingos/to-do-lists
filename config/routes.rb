@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'all_list/index'
+
+  get 'public_list/index'
+
+  get 'favorite/index'
+
   get 'main/index'
 
   get 'welcome/index'
