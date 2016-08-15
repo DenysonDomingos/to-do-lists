@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:show, :edit, :update, :destroy, :privat, :public]
+  before_action :set_todo_list, only: [:show, :edit, :update, :destroy, :privat, :public, :favorite]
   before_action :authenticate_user!
 
 
@@ -75,6 +75,23 @@ class TodoListsController < ApplicationController
     @todo_list.update_attribute(:privat, false)
     redirect_to todo_lists_path, notice: "Privacy changed to completed public"
   end
+
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @todo_list
+      redirect_to :back, notice: 'You favorited #{@todo_list.name}'
+
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@todo_list)
+      redirect_to :back, notice: 'Unfavorited #{@todo_list.name}'
+
+    else
+      # Type missing, nothing happens
+      redirect_to :back, notice: 'Nothing happened.'
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

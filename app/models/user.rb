@@ -3,4 +3,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+	
+	has_many :todo_lists
+	
+	has_many :favorite_todo_lists 
+	has_many :favorites, through: :favorite_todo_lists, source: :todo_list
+
+
 end

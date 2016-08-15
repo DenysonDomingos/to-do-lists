@@ -6,8 +6,13 @@
 		<% if todo_list.privat == true %>
 			<i class="fa fa-lock" aria-hidden="true"></i>
 		<% else %>
-			<i class="fa fa-unlock" aria-hidden="true"></i>
+			<i class="fa fa-unlock" aria-hidden="true"></i>	
 		<% end %>
+		<i class="fa fa-star-o" aria-hidden="true"></i>
+		<%= link_to "favorite",   favorite_todo_list_path(todo_list.id, type: "favorite"), method: :put %>
+		
+	    <%= link_to "unfavorite", favorite_todo_list_path(todo_list.id, type: "unfavorite"), method: :put %>
+
 	  </div>
 	<% else %>
 
