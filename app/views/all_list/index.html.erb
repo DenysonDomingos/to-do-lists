@@ -4,9 +4,21 @@
 	    <h2 class="todo_list_title"><%= link_to todo_list.title, todo_list %></h2>
 	    <p class="todo_list_sub_title"><%= todo_list.description %></p>
 		<% if todo_list.privat == true %>
-			<i class="fa fa-lock" aria-hidden="true"></i>
+			<% if todo_list.user_create == current_user.email %>
+				<%= link_to public_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-lock" aria-hidden="true"></i>
+				<% end %>
+			<% else %>
+				<i class="fa fa-lock" aria-hidden="true"></i>
+			<% end %>
 		<% else %>
-			<i class="fa fa-unlock" aria-hidden="true"></i>
+			<% if todo_list.user_create == current_user.email %>
+				<%= link_to privat_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-unlock" aria-hidden="true"></i>
+				<% end %>
+			<% else %>
+				<i class="fa fa-unlock" aria-hidden="true"></i>
+			<% end %>	
 		<% end %>
 	  </div>
 	<% else %>
@@ -15,9 +27,13 @@
 		    <h2 class="todo_list_title"><%= link_to todo_list.title, todo_list %></h2>
 		    <p class="todo_list_sub_title"><%= todo_list.description %></p>
 			<% if todo_list.privat == true %>
-				<i class="fa fa-lock" aria-hidden="true"></i>
+				<%= link_to public_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-lock" aria-hidden="true"></i>
+				<% end %>
 			<% else %>
-				<i class="fa fa-unlock" aria-hidden="true"></i>
+				<%= link_to privat_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-unlock" aria-hidden="true"></i>
+				<% end %>
 			<% end %>
 		  </div>
 		<% else %>
