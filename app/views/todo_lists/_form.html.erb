@@ -13,7 +13,7 @@
 
   <div class="select">
     <%= f.label "Privacy" %><br>
-    <%= f.select(:privat, options_for_select([['Public', false], ["Private", true]], @todo_list.privat), {include_blank: "Select"}, { 'data-width' => "10%"}) %>
+    <%= f.select(:privat, options_for_select([['Public', false], ["Private", true]], @todo_list.privat), {include_blank: "Select"}, { 'data-width' => "10%",:class => "selectpicker"}) %>
   </div>
 
   <div class="field">

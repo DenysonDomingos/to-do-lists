@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list, only: [:show, :edit, :update, :destroy, :privat, :public]
   before_action :authenticate_user!
 
 
@@ -64,6 +64,16 @@ class TodoListsController < ApplicationController
       format.html { redirect_to todo_lists_url, notice: 'Todo list was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def privat 
+    @todo_list.update_attribute(:privat, true)
+    redirect_to todo_lists_path, notice: "Privacy changed to completed private"
+  end
+
+  def public 
+    @todo_list.update_attribute(:privat, false)
+    redirect_to todo_lists_path, notice: "Privacy changed to completed public"
   end
 
   private
