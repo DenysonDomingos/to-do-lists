@@ -12,19 +12,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :todo_subitems
+
   resources :todo_lists do
     resources :todo_items do
     	member do
     		patch :complete
     	end
-    end
-  end
-
-  resources :todo_items do
-    resources :todo_subitems do
-      member do
-        patch :complete
-      end
     end
   end
 
