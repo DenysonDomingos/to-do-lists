@@ -20,6 +20,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :todo_items do
+    resources :todo_subitems do
+      member do
+        patch :complete
+      end
+    end
+  end
+
   resources :todo_lists do
     member do
       patch :privat

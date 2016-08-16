@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815211024) do
+ActiveRecord::Schema.define(version: 20160816204452) do
 
   create_table "favorite_todo_lists", force: :cascade do |t|
     t.integer  "todo_list_id"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20160815211024) do
     t.datetime "updated_at",  null: false
     t.boolean  "privat"
     t.string   "user_create"
+  end
+
+  create_table "todo_subitems", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "todo_item_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["todo_item_id"], name: "index_todo_subitems_on_todo_item_id"
   end
 
   create_table "users", force: :cascade do |t|
