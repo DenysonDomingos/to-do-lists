@@ -13,10 +13,12 @@
 					<%= link_to favorite_todo_list_path(todo_list.id, type: "unfavorite"), method: :put do %>
 						<i class="fa fa-star" aria-hidden="true"></i>
 					<% end %>
-				<% break %>
+				<% @found = true %>
 			<% end %>	
 		<% end %>
-		<% if todo_list.favorited_by.blank? %>
+
+
+		<% if @found != true or todo_list.favorited_by.blank? %>
 			<%= link_to favorite_todo_list_path(todo_list.id, type: "favorite"), method: :put do %>
 				<i class="fa fa-star-o" aria-hidden="true"></i>
 			<% end %>
