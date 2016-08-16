@@ -10,8 +10,34 @@
 </head>
 <body>
 
+<header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "Todo list", welcome_index_path, id: "logo" %>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "My Lists", todo_lists_path  %></li>
+          <li><%= link_to "Favorite Lists ", favorite_index_path %></li>
+          <li><%= link_to "Public Lists", public_list_index_path %></li>
+          <li><%= link_to "All Lists", all_list_index_path %></li>
+        </ul>
+      
+      <% end %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= current_user.email %></li>
+              <li><%= link_to "Sing_up", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Log in", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+</header>
+
 <div class="container">
-	<%= yield %>
+  <%= bootstrap_flash %>
+  <%= yield %>
 </div>
 
 </body>

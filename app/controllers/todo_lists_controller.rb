@@ -1,5 +1,7 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list, only: [:show, :edit, :update, :destroy, :privat, :public, :favorite]
+  before_action :authenticate_user!
+
 
   # GET /todo_lists
   # GET /todo_lists.json
@@ -27,6 +29,9 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.new(todo_list_params)
 
     respond_to do |format|
+
+    @todo_list.user_create = current_user.email
+      
       if @todo_list.save
         format.html { redirect_to @todo_list, notice: 'Todo list was successfully created.' }
         format.json { render :show, status: :created, location: @todo_list }
@@ -61,6 +66,33 @@ class TodoListsController < ApplicationController
     end
   end
 
+  def privat 
+    @todo_list.update_attribute(:privat, true)
+    redirect_to :back, notice: "Privacy changed to completed private"
+  end
+
+  def public 
+    @todo_list.update_attribute(:privat, false)
+    redirect_to :back, notice: "Privacy changed to completed public"
+  end
+
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @todo_list
+      redirect_to :back, notice: 'Favorited'
+
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@todo_list)
+      redirect_to :back, notice: 'Unfavorited'
+
+    else
+      # Type missing, nothing happens
+      redirect_to :back, notice: 'Nothing happened.'
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_list
@@ -69,6 +101,6 @@ class TodoListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_list_params
-      params.require(:todo_list).permit(:title, :description)
+      params.require(:todo_list).permit(:title, :description, :privat, :user_create)
     end
 end

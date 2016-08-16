@@ -1,0 +1,30 @@
+<div class="center jumbotron">
+
+	<% if user_signed_in? %>
+
+    <h1> Let's go. </h1>
+
+    <h2>
+      With organization and time, finds the secret of making all and well done.
+    </h2>
+
+	  
+	<% else %>
+
+    <h1> Welcome To-do List </h1>
+
+    <h2>
+      Your life in a more organized way
+    </h2>
+
+	  <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+	<% end %>
+
+
+<!--   <h3>
+    <br>
+  Lower your IT costs, visit:
+  <a href="http://www.autoseg.com/">autoseg.com</a>
+  </h3>
+ -->
+</div>

@@ -1,0 +1,65 @@
+<% @todo_lists.each do |todo_list| %>
+	<% if todo_list.privat == false %>
+	  <div class="index_row clearfix">
+	    <h2 class="todo_list_title"><%= link_to todo_list.title, todo_list %></h2>
+	    <p class="todo_list_sub_title"><%= todo_list.description %></p>
+		<% if todo_list.privat == true %>
+			<% if todo_list.user_create == current_user.email %>
+				<%= link_to public_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-lock" aria-hidden="true"></i>
+				<% end %>
+			<% else %>
+				<i class="fa fa-lock" aria-hidden="true"></i>
+			<% end %>
+		<% else %>
+			<% if todo_list.user_create == current_user.email %>
+				<%= link_to privat_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-unlock" aria-hidden="true"></i>
+				<% end %>
+			<% else %>
+				<i class="fa fa-unlock" aria-hidden="true"></i>
+			<% end %>	
+		<% end %>
+
+		<% if todo_list.user_create != current_user.email %>
+			<% todo_list.favorited_by.each do |f| %>
+				<% if f == current_user %>
+						<%= link_to favorite_todo_list_path(todo_list.id, type: "unfavorite"), method: :put do %>
+							<i class="fa fa-star" aria-hidden="true"></i>
+						<% end %>
+					<% @found = true %>
+				<% end %>	
+			<% end %>
+
+
+			<% if @found != true or todo_list.favorited_by.blank? %>
+				<%= link_to favorite_todo_list_path(todo_list.id, type: "favorite"), method: :put do %>
+					<i class="fa fa-star-o" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		
+		<% end %>
+	  </div>
+	<% else %>
+		<% if todo_list.user_create == current_user.email %>
+		  <div class="index_row clearfix">
+		    <h2 class="todo_list_title"><%= link_to todo_list.title, todo_list %></h2>
+		    <p class="todo_list_sub_title"><%= todo_list.description %></p>
+			<% if todo_list.privat == true %>
+				<%= link_to public_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-lock" aria-hidden="true"></i>
+				<% end %>
+			<% else %>
+				<%= link_to privat_todo_list_path(todo_list.id), method: :patch do %>
+					<i class="fa fa-unlock" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		  </div>
+		
+		<% end %>
+	<% end %>
+<% end %>
+
+<div class="links">
+  <%= link_to "New Todo List", new_todo_list_path %>
+</div>
