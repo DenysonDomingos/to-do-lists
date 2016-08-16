@@ -8,14 +8,20 @@
 		<% else %>
 			<i class="fa fa-unlock" aria-hidden="true"></i>	
 		<% end %>
-		<i class="fa fa-star-o" aria-hidden="true"></i>
-		<%= link_to "favorite",   favorite_todo_list_path(todo_list.id, type: "favorite"), method: :put %>
-		
-	    <%= link_to "unfavorite", favorite_todo_list_path(todo_list.id, type: "unfavorite"), method: :put %>
-
+		<% todo_list.favorited_by.each do |f| %>
+			<% if f == current_user %>
+					<%= link_to favorite_todo_list_path(todo_list.id, type: "unfavorite"), method: :put do %>
+						<i class="fa fa-star" aria-hidden="true"></i>
+					<% end %>
+				<% break %>
+			<% end %>	
+		<% end %>
+		<% if todo_list.favorited_by.blank? %>
+			<%= link_to favorite_todo_list_path(todo_list.id, type: "favorite"), method: :put do %>
+				<i class="fa fa-star-o" aria-hidden="true"></i>
+			<% end %>
+		<% end %>
 	  </div>
-	<% else %>
-
 	<% end %>
 <% end %>
 

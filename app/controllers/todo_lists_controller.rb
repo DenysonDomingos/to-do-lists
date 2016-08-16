@@ -68,23 +68,23 @@ class TodoListsController < ApplicationController
 
   def privat 
     @todo_list.update_attribute(:privat, true)
-    redirect_to todo_lists_path, notice: "Privacy changed to completed private"
+    redirect_to :back, notice: "Privacy changed to completed private"
   end
 
   def public 
     @todo_list.update_attribute(:privat, false)
-    redirect_to todo_lists_path, notice: "Privacy changed to completed public"
+    redirect_to :back, notice: "Privacy changed to completed public"
   end
 
   def favorite
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @todo_list
-      redirect_to :back, notice: 'You favorited #{@todo_list.name}'
+      redirect_to :back, notice: 'Favorited'
 
     elsif type == "unfavorite"
       current_user.favorites.delete(@todo_list)
-      redirect_to :back, notice: 'Unfavorited #{@todo_list.name}'
+      redirect_to :back, notice: 'Unfavorited'
 
     else
       # Type missing, nothing happens
