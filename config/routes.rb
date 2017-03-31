@@ -32,22 +32,6 @@ Rails.application.routes.draw do
       put :favorite
     end
   end
-
-
-  # resources :todo_lists do
-  #   resources :favorites
-  # end
-
-  # resources :users do
-  #   resources :favorites
-  # end
-
-  # if user_signed_in?
-  #   root "todo_lists#index"
-  # else
-  #   root "welcome#index"
-  # end
-
+  
   root "welcome#index"
-  # root "todo_lists#index"
 end
